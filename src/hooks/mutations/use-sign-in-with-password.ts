@@ -11,6 +11,7 @@ export function useSignInWithPassword(callbacks?: UseMutationCallback) {
       if (callbacks?.onError) {
         callbacks.onError(error);
       }
-    }
+    },
+
   });
 }

@@ -1,4 +1,4 @@
-import {Navigate, Route, Routes} from "react-router";
+import { Navigate, Route, Routes } from "react-router";
 import SignUpPage from "@/pages/sign-up-page.tsx";
 import SignInPage from "@/pages/sign-in-page.tsx";
 import ForgetPasswordPage from "@/pages/forget-password-page.tsx";
@@ -7,20 +7,26 @@ import PostDetailPage from "@/pages/post-detail-page.tsx";
 import ProfileDetailPage from "@/pages/profile-detail-page.tsx";
 import ResetPasswordPage from "@/pages/reset-password-page.tsx";
 import GlobalLayout from "@/layout/global-layout.tsx";
+import GuestOnlyLayout from "@/layout/guest-only-layout.tsx";
+import MemberOnlyLayout from "@/layout/member-only-layout.tsx";
 
 export default function RootRoute() {
-    return (
-        <Routes>
-            <Route element={<GlobalLayout/>}>
-                <Route path="/sign-in" element={<SignInPage/>}/>
-                <Route path="/sign-up" element={<SignUpPage/>}/>
-                <Route path="/forget-password" element={<ForgetPasswordPage/>}/>
-                <Route path="/" element={<IndexPage/>}/>
-                <Route path="/post/:postId" element={<PostDetailPage/>}/>
-                <Route path="/profile/:userId" element={<ProfileDetailPage/>}/>
-                <Route path="/reset-password" element={<ResetPasswordPage/>}/>
-                <Route path="*" element={<Navigate to={"/"}/>}/>
-            </Route>
-        </Routes>
-    )
+  return (
+    <Routes>
+      <Route element={<GlobalLayout />}>
+        <Route element={<GuestOnlyLayout />}>
+          <Route path="/sign-in" element={<SignInPage />} />
+          <Route path="/sign-up" element={<SignUpPage />} />
+          <Route path="/forget-password" element={<ForgetPasswordPage />} />
+        </Route>
+        <Route element={<MemberOnlyLayout />}>
+          <Route path="/" element={<IndexPage />} />
+          <Route path="/post/:postId" element={<PostDetailPage />} />
+          <Route path="/profile/:userId" element={<ProfileDetailPage />} />
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
+          <Route path="*" element={<Navigate to={"/"} />} />
+        </Route>
+      </Route>
+    </Routes>
+  );
 }
