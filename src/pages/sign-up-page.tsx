@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button.tsx";
 import { Link } from "react-router";
-import { useSignUp } from "@/hooks/mutations/use-sign-up.ts";
+import { useSignUp } from "@/hooks/mutations/auth/use-sign-up.ts";
 import { generateErrorMessage } from "@/lib/error.ts";
 import { toast } from "sonner";
 
