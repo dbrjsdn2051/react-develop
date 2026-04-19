@@ -5,3 +5,5 @@ export const QUERY_KES = {
     byId: (userId: string) => ["profile", "byId", userId]
   }
 };
+
+export const BUCKET_NAME = "uploads";

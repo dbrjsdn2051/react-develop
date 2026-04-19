@@ -6,6 +6,7 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useCreatePost } from "@/hooks/mutations/post/use-create-post.ts";
 import { toast } from "sonner";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel.tsx";
+import { useSession } from "@/store/session.ts";
 
 type Image = {
   file: File,
@@ -14,6 +15,7 @@ type Image = {
 
 export default function PostEditorModal() {
 
+  const session = useSession();
   const { isOpen, close } = usePostEditorModal();
   const [content, setContent] = useState("");
   const [images, setImages] = useState<Image[]>([]);
@@ -37,7 +39,14 @@ export default function PostEditorModal() {
     if (content.trim() === "") {
       return;
     }
-    createPost(content);
+    if (!session?.user.id) {
+      return;
+    }
+    createPost({
+      content,
+      images: images.map((image) => image.file),
+      userId: session.user.id
+    });
   };
 
   const handleSelectImages = (e: ChangeEvent<HTMLInputElement>) => {
@@ -71,7 +80,7 @@ export default function PostEditorModal() {
     setImages([]);
   }, [isOpen]);
 
-  return <Dialog open={isOpen} onOpenChange={handleCloseModal}>;
+  return <Dialog open={isOpen} onOpenChange={handleCloseModal}>
     <DialogContent className={"max-h-[90vh]"}>
       <DialogTitle>포스트 작성</DialogTitle>
       <textarea disabled={isCreatePostPending} ref={textareaRef} value={content}
