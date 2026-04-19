@@ -3,6 +3,11 @@ export const QUERY_KES = {
     all: ["profile"],
     list: ["profile", "list"],
     byId: (userId: string) => ["profile", "byId", userId]
+  },
+  post: {
+    all: ["post"],
+    list: ["post", "list"],
+    byId: (postId: string) => ["post", "byId", postId]
   }
 };
 
