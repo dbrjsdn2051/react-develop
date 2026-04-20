@@ -2,6 +2,7 @@ import {Link, Outlet} from "react-router";
 import logo from "@/assets/logo.png"
 import {SunIcon} from "lucide-react";
 import defaultAvatar from "@/assets/default-avatar.png"
+import ProfileButton from "@/layout/header/profile-button.tsx";
 
 export default function GlobalLayout() {
     return <div className={"flex min-h-screen flex-col"}>
@@ -15,7 +16,7 @@ export default function GlobalLayout() {
                     <div className={"hover:bg-muted cursor-pointer rounded-full p-2"}>
                         <SunIcon/>
                     </div>
-                    <img className={"h-6"} src={defaultAvatar} alt={"default profile"}/>
+                    <ProfileButton/>
                 </div>
             </div>
         </header>
