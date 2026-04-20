@@ -6,11 +6,11 @@ import { useEffect } from "react";
 import { useInfinitePostsData } from "@/hooks/queries/use-infinite-posts-data.ts";
 
 export default function PostFeed() {
-  const {data, error, isPending, fetchNextPage, isFetchingNextPage} = useInfinitePostsData()
-  const {ref, inView} = useInView();
+  const { data, error, isPending, fetchNextPage, isFetchingNextPage } = useInfinitePostsData();
+  const { ref, inView } = useInView();
 
   useEffect(() => {
-    if(inView) {
+    if (inView) {
       fetchNextPage();
     }
   }, [inView]);
@@ -20,7 +20,7 @@ export default function PostFeed() {
 
   return <div className={"flex flex-col gap-10"}>
     {
-      data.pages.map((page) => page.map((post) => <PostItem key={post.id} {...post} />))
+      data.pages.map((page) => page.map((postId) => <PostItem key={postId} postId={postId}/>))
     }
     {isFetchingNextPage && <Loader />}
     <div ref={ref}></div>

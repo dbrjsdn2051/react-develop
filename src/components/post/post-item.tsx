@@ -6,10 +6,20 @@ import { formatTimeAgo } from "@/lib/time.ts";
 import EditPostButton from "@/components/post/edit-post-button.tsx";
 import DeletePostButton from "@/components/post/delete-post-button.tsx";
 import { useSession } from "@/store/session.ts";
+import { usePostByIdData } from "@/hooks/queries/use-post-by-id-data.ts";
+import Loader from "@/components/loader.tsx";
+import Fallback from "@/components/fallback.tsx";
 
-export default function PostItem(post: Post) {
+export default function PostItem({ postId }: { postId: number }) {
   const session = useSession();
   const userId = session?.user.id;
+
+  const { data: post, isPending, error } = usePostByIdData({
+    postId, type: "FEED"
+  });
+
+  if (isPending) return <Loader />;
+  if (error) return <Fallback />;
 
   const isMine = post.author_id === userId;
 
