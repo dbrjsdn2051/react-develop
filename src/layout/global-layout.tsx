@@ -3,6 +3,7 @@ import logo from "@/assets/logo.png"
 import {SunIcon} from "lucide-react";
 import defaultAvatar from "@/assets/default-avatar.png"
 import ProfileButton from "@/layout/header/profile-button.tsx";
+import ThemeButton from "@/layout/header/theme-button.tsx";
 
 export default function GlobalLayout() {
     return <div className={"flex min-h-screen flex-col"}>
@@ -13,9 +14,7 @@ export default function GlobalLayout() {
                     <div className="font-bold">SNS</div>
                 </Link>
                 <div className={"flex items-center gap-5"}>
-                    <div className={"hover:bg-muted cursor-pointer rounded-full p-2"}>
-                        <SunIcon/>
-                    </div>
+                    <ThemeButton />
                     <ProfileButton/>
                 </div>
             </div>
