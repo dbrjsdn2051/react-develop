@@ -36,7 +36,7 @@ export async function fetchPostById({ postId, userId }: { postId: number, userId
   if (error) throw error;
   return {
     ...data,
-    isLiked: post.myLiked && post.myLiked.length > 0
+    isLiked: data.myLiked && data.myLiked.length > 0
   };
 }
 

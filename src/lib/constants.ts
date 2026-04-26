@@ -9,6 +9,10 @@ export const QUERY_KES = {
     list: ["post", "list"],
     userList: (userId: string) => ["post", "userList", userId],
     byId: (postId: string) => ["post", "byId", postId]
+  },
+  comment: {
+    all: ["comment"],
+    post: (postId: number) => ["comment", "post", postId]
   }
 };
 

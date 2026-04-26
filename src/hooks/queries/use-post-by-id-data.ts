@@ -9,7 +9,7 @@ export function usePostByIdData({ postId, type }: {
   const session = useSession();
   return useQuery({
     queryKey: QUERY_KES.post.byId(postId),
-    queryFn: () => fetchPostById(postId, session.user.id),
+    queryFn: () => fetchPostById({ postId, userId: session.user.id }),
     enabled: type !== "FEED"
   });
 }

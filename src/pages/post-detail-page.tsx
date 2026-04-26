@@ -1,5 +1,18 @@
+import PostItem from "@/components/post/post-item.tsx";
+import { Navigate, useParams } from "react-router";
+import CommentEditor from "@/components/comment/comment-editor.tsx";
+import CommentList from "@/components/comment/comment-list.tsx";
+
 export default function PostDetailPage() {
-    return <div>
-        PostDetailPage
-    </div>
+  const params = useParams();
+  const postId = params.postId;
+
+  if (!postId) return <Navigate to={"/"} />;
+
+  return <div className={"flex flex-col gap-5"}>
+    <PostItem key={postId} postId={Number(postId)} type={"DETAIL"} />
+    <div className={"text-xl font-bold"}>댓글</div>
+    <CommentEditor type={"CREATE"} postId={Number(postId)} />
+    <CommentList postId={Number(postId)} />
+  </div>;
 }
